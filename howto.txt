@@ -1,0 +1,9 @@
+gcc -c calc_mean.c -o calc_mean.o
+ar rcs libmean.a calc_mean.o
+gcc -c -fPIC calc_mean.c -o calc_mean.o
+gcc -shared -Wl,-soname,libmean.so.1 -o libmean.so.1.0.1  calc_mean.o
+sudo cp libmean.so.1.0.1 /usr/lib/
+sudo ln -sf /usr/lib/libmean.so /usr/lib/libmean.so
+sudo ln -sf /usr/lib/libmean.so /usr/lib/libmean.so.1
+gcc -Wall -L./ main.c -lmean
+./a.out
